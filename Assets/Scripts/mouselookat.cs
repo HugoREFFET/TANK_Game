@@ -1,23 +1,40 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class mouselookat : MonoBehaviour
 {
-    private float turnDirection;
+    private Camera cam;
+    // Start is called before the first frame update
+    void Start()
+    {
+        cam = Camera.main;
+    }
 
+    // Update is called once per frame
     void Update()
     {
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
-        transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
-    }
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100);
+        if(Physics.Raycast(ray.origin, ray.direction * 100, out var hitInfo))
+        {
+            Debug.Log("touche");
+            var dir = hitInfo.point - transform.position;
+            dir.y = 0f;
+            
+            var r = Quaternion.LookRotation(dir, Vector3.up);
 
-    void FixedUpdate()
-    {
-        transform.Rotate(Vector3.up, turnDirection);
-    }
-    public void Rotate(InputAction.CallbackContext context)
-    {
-        turnDirection = context.ReadValue<float>();
+        transform.rotation = r;
+        
+        }
+
+
+
+
+        
+        
+        
+        
     }
 }

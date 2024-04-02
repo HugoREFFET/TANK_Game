@@ -6,9 +6,9 @@ public class PlayerTank : MonoBehaviour
     public float speed;
     
     public Rigidbody rb;
-    private Vector3 moveDirection;
-    private float inputDirection;
-    private float turnDirection;
+    public Vector3 moveDirection;
+    public float inputDirection;
+    public float turnDirection;
 
     void Update()
     {
