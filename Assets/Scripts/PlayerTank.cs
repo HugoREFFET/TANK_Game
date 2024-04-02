@@ -9,12 +9,7 @@ public class PlayerTank : MonoBehaviour
     public Vector3 moveDirection;
     public float inputDirection;
     public float turnDirection;
-
-    void Update()
-    {
-        
-    }
-
+    
     void FixedUpdate ()
     {
         moveDirection = (transform.forward * inputDirection).normalized;
