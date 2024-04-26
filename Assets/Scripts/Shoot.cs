@@ -13,11 +13,12 @@ public class Shoot : MonoBehaviour
       Transform canonTransform = transform;
       spawnedBullet = Instantiate(bulletPrefab, canonTransform.position, canonTransform.rotation);
       spawnedBullet.GetComponent<Rigidbody>().AddForce(spawnedBullet.transform.forward * speedBullet, ForceMode.Impulse);
+      AudioManager.Instance.PlaySFX("Shoot");
    }
    
    public void HandleShoot(InputAction.CallbackContext context)
    {
-      Debug.Log("Shoot !");
+      //Debug.Log("Shoot !");
       
       if (context.phase == InputActionPhase.Performed)
       {
